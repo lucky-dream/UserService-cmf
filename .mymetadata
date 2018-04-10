@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="UserService-cmf"
+  id="myeclipse.1523278239104"
+  context-root="/UserService-cmf"
+  j2ee-spec="6.0"
+  archive="UserService-cmf.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usermanager.mappers.UserGroupMapper">
+	<!-- 获取所有组列表（当前仅超级管理员） -->
+	<select id="getGroupsList" resultType="com.usermanager.entity.GroupAll">
+		select * from groups
+	</select>
+	<!--获取已加入组列表 -->
+	
+	<select id="joinedGroupByName" parameterType="string"
+		resultType="com.usermanager.entity.UserGroup">
+		select groupid from groupuser where name=#{name}
+	</select>
+	<!-- 根据组id查询组名 -->
+	<select id="getGroupNameById" parameterType="string"
+		resultType="com.usermanager.entity.Groups">
+		select groupnmae from groups where groupid=#{groupId}
+	</select>
+	<!--用户创建组  -->  <!-- 加入其他组 -->
+	<insert id="addGroupMembers" parameterType="UserGroup">
+		insert into
+		(groupid,name,password,sign,owner) values
+		(groupid=#{groupid},name=#{name},password=#{password},sign=#{sign},owner=#{owner});
+	</insert>
+	<insert id="createGroups" parameterType="Groups">
+		insert into groups(groupid,groupname) values
+		(groupid=#{groupid},groupname=#{groupname})
+	</insert>
+	<!--搜索组 -->
+	<select id="searchGroup" parameterType="string"
+		resultType="com.usermanager.entity.UserGroup">
+		select groupid,name,sign,owner from groupuser where name regexp #{regexp}
+		group by groupid
+	</select>
+	
+	
+	
+	
+	
+	<!-- 删除组 （仅创建者可删除） -->
+	<delete id="deleteGroup" parameterType="string">
+		delete from groupuser where groupid=#{groupid}
+	</delete>
+	<delete id="deleteGr" parameterType="string">
+		delete from groups where groupid=#{groupid}
+	</delete>
+
+</mapper>

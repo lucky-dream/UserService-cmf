@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usermanager.mappers.FriendUserMapper">
+	<!--添加好友 -->
+	<insert id="addFriends" parameterType="FriendUser" >
+	     insert into #{friend_table} values (#{friend_Name})
+	</insert>
+	
+	<!--删除好友 -->
+	<delete id="deleteFriend"  parameterType="FriendUser">
+	    delete from #{friend_table} where friend_id=#{friend_Name}
+	</delete>
+	<!-- 通过id查询所有好友 -->
+	<select id="queryFriendsById" parameterType="string" resultType="com.usermanager.entity.FriendUser">
+	    select * from  #{friend_tablename} where id={#id}
+	</select>
+	
+</mapper>

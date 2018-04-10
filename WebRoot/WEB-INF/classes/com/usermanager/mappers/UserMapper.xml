@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usermanager.mappers.UserMapper">
+    <!-- 注册 -->
+    
+
+	<!-- 获取用户列表（当前仅超级管理员） -->
+	<select id="getUserList" resultType="com.usermanager.entity.User">
+		select * from user
+	</select>
+	<!-- 获取好友列表 -->
+	<select id="getFriendList" parameterType="string" resultType="com.usermanager.entity.User">
+		select * from  #{friend_tablename}
+	</select>
+	<!--用户搜索-->
+	<select id="searchUser" parameterType="string" resultType="com.usermanager.entity.User">
+	    select name from user where name regexp #{regexp}  
+	</select>
+	<!-- id/互查 -->
+	<select id="searchNameById" parameterType="string" >
+	    select name from user where id=#{id}
+	</select>
+	<select id="searchIdByName" parameterType="string" >
+	    select id from user where name=#{name}
+	</select>
+	<!-- 通过id查询某个用户所有信息 -->
+	<select id="searchUserById" parameterType="string" resultType="com.usermanager.entity.User">
+	   select * from user where id=#{id}
+	</select>
+	
+</mapper>
